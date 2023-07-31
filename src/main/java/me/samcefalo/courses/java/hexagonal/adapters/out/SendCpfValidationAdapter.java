@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SendCpfValidationAdapter implements SendCpfForValidationOutputPort {
 
+    private final String TOPIC = "tp-cpf-validation";
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public SendCpfValidationAdapter(KafkaTemplate<String, String> kafkaTemplate) {
@@ -15,6 +16,6 @@ public class SendCpfValidationAdapter implements SendCpfForValidationOutputPort 
 
     @Override
     public void send(String cpf) {
-        kafkaTemplate.send("tp-cpf-validation", cpf);
+        kafkaTemplate.send(TOPIC, cpf);
     }
 }
